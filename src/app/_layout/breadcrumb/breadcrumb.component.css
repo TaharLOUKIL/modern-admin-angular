@@ -1,0 +1,20 @@
+.dropdown-menu-right {
+  right: 0;
+  left: auto !important;
+}
+
+.dropdown-menu.arrow:before {
+    left: 70px !important;
+    border-bottom-color: #ffffff;
+}
+
+.dropdown-menu.arrow:after {
+    top: 0px;
+}
+
+@media only screen and (max-width:767px) {
+  ._dropdown_mob {
+      margin-left: 150px !important;
+      transform: translate(40px, 40px) !important;
+  }
+}

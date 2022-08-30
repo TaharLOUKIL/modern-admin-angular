@@ -1,0 +1,11 @@
+@media (min-width: 767.98px) {
+    .collapse:not(.show) {
+        display: flex !important;
+    }
+}
+
+@media (min-width: 767.98px) {
+    .justify-content-end {
+        display: flex !important;
+    }
+}

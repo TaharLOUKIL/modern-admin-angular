@@ -1,0 +1,4 @@
+<app-full-layout-navbar *ngIf="showNavbar"></app-full-layout-navbar>
+<router-outlet></router-outlet>
+<div class="sidenav-overlay d-none" id="sidenav-overlay" (click)="rightbar($event)"></div>
+<app-footer *ngIf="showFooter"></app-footer>

@@ -1,0 +1,14 @@
+<div (window:resize)="onResize($event)"></div>
+<app-navigation></app-navigation>
+<router-outlet></router-outlet>
+<div
+  class="sidenav-overlay d-none"
+  id="sidenav-overlay"
+  (click)="rightbar($event)"
+></div>
+<app-footer></app-footer>
+<div *ngIf="customizer === 'on'">
+  <app-horizontal-customizer
+    *ngIf="layout === 'horizontal'"
+  ></app-horizontal-customizer>
+</div>

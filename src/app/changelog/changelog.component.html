@@ -1,0 +1,135 @@
+<div class="app-content content">
+  <div class="content-wrapper">
+    <div class="content-header row mb-1">
+      <app-breadcrumb class="col-12" [breadcrumb]="breadcrumb"></app-breadcrumb>
+    </div>
+    <div class="content-body">
+      <section id="drag-area">
+        <div class="row">
+          <div class="col-md-12" *blockUI="'changelog'; message: 'Loading'">
+            <m-card
+              [options]="options"
+              (reloadFunction)="reloadChangelog($event)"
+            >
+              <ng-container mCardHeaderTitle> Release Updates: </ng-container>
+              <ng-container mCardBody>
+                <h5 class="my-2">26-11-2021 [V3.2]</h5>
+                <div class="card-text">
+                  <ul>
+                    <li>Upgraded project to use Angular 13.0.2</li>
+                    <li>Other minor bug fixes.</li>
+                  </ul>
+                </div>
+                <h5 class="my-2">26-08-2021 [V3.1]</h5>
+                <div class="card-text">
+                  <ul>
+                    <li>Upgraded project to use ESLint</li>
+                    <li>Other minor bug fixes.</li>
+                  </ul>
+                </div>
+                <h5 class="my-2">25-06-2021 [V3.0]</h5>
+                <div class="card-text">
+                  <ul>
+                    <li>Upgraded project to use Angular 12.0.5</li>
+                    <li>Other minor bug fixes.</li>
+                  </ul>
+                </div>
+                <h5 class="my-2">24-05-2021 [V2.6]</h5>
+                <div class="card-text">
+                  <ul>
+                    <li>Upgraded project to use Angular 11.2.12.</li>
+                    <li>Added Kanban Application</li>
+                    <li>Added Hospital theme Dashboard</li>
+                    <li>
+                      Fixed all high severity vulnerablities with Angular
+                      11.2.12.
+                    </li>
+                    <li>Other minor bug fixes.</li>
+                  </ul>
+                </div>
+                <h5 class="my-2">11-02-2021 [V2.5]</h5>
+                <div class="card-text">
+                  <ul>
+                    <li>Upgraded project to use Angular 11.1.0.</li>
+                    <li>Added Tree View under Extra Components</li>
+                    <li>Other minor bug fixes.</li>
+                  </ul>
+                </div>
+                <h5 class="my-2">08-11-2020 [V2.4]</h5>
+                <div class="card-text">
+                  <ul>
+                    <li>Upgraded project to use Angular 11.0.0.</li>
+                    <li>Upgraded project to use ng-bootstrap 5.0.0.</li>
+                    <li>Fix ngb-calender not default to current date.</li>
+                    <li>Added Dropzone for file upload.</li>
+                    <li>Other minor bug fixes.</li>
+                  </ul>
+                </div>
+                <h5 class="my-2">01-09-2020 [V2.3]</h5>
+                <div class="card-text">
+                  <ul>
+                    <li>Upgraded project to use Angular 10.1.0.</li>
+                    <li>Fix Card layout issue.</li>
+                    <li>Other minor bug fixes.</li>
+                  </ul>
+                </div>
+                <h5 class="my-2">29-07-2020 [V2.2]</h5>
+                <div class="card-text">
+                  <ul>
+                    <li>Upgraded project to use Angular 10.0.6.</li>
+                    <li>New layout for TODO applications.</li>
+                  </ul>
+                </div>
+                <h5 class="my-2">30-02-2020 [V2.1]</h5>
+                <div class="card-text">
+                  <ul>
+                    <li>Upgraded to Angular 9.1.9</li>
+                    <li>Upgraded to Bootstrap 5.2.2</li>
+                    <li>
+                      Upgraded SCSS to latest HTML version of the Modern admin
+                    </li>
+                    <li>New design for Email Application</li>
+                    <li>
+                      New design for Chat Application (Static as well as Live)
+                    </li>
+                  </ul>
+                </div>
+                <h5 class="my-2">15-02-2020 [V2.0]</h5>
+                <div class="card-text">
+                  <ul>
+                    <li>Upgraded project to use Angular 9.0.0.</li>
+                    <li>Fixed bank navigation menu highlight issue.</li>
+                  </ul>
+                </div>
+                <h5 class="my-2">12-06-2019 [V1.2]</h5>
+                <div class="card-text">
+                  <ul>
+                    <li>Upgraded project to use Angular 9.0.0.</li>
+                    <li>Fixed bank navigation menu highlight issue.</li>
+                  </ul>
+                </div>
+                <h5 class="my-2">11-08-2019 [V1.1]</h5>
+                <div class="card-text">
+                  <ul>
+                    <li>Added configuration to hide header icons.</li>
+                    <li>Added ngx-toastr in TODO application.</li>
+                    <li>
+                      Added fully functional CRUD Firebase API integration for
+                      TODO App.
+                    </li>
+                  </ul>
+                </div>
+                <h5 class="my-2">10-12-2019 [V1.0]</h5>
+                <div class="card-text">
+                  <ul>
+                    <li>Initial release</li>
+                  </ul>
+                </div>
+              </ng-container>
+            </m-card>
+          </div>
+        </div>
+      </section>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,66 @@
+<nav
+  class="header-navbar navbar-expand-md navbar navbar-with-menu navbar-without-dd-arrow fixed-top navbar-shadow"
+  [ngClass]="selectedHeaderNavBarClass"
+>
+  <div class="navbar-wrapper">
+    <div
+      id="navbar-header"
+      class="navbar-header"
+      [ngClass]="selectedNavBarHeaderClass"
+      (mouseenter)="mouseEnter($event)"
+      (mouseleave)="mouseLeave($event)"
+    >
+      <ul class="nav navbar-nav flex-row">
+        <!-- Remove position relative in responsive -->
+        <li class="nav-item mobile-menu d-lg-none mr-auto">
+          <a
+            class="nav-link nav-menu-main menu-toggle hidden-xs11"
+            (click)="toggleNavigation($event)"
+          >
+            <i class="feather ft-menu font-large-1"></i
+          ></a>
+        </li>
+        <li class="nav-item mr-auto">
+          <a
+            [routerLink]="['']"
+            class="navbar-brand"
+            routerLink="/dashboard/sales"
+            ><img
+              class="brand-logo"
+              alt="modern admin logo"
+              [src]="_themeSettingsConfig.brand.logo.value"
+            />
+            <h3 class="brand-text">
+              {{ _themeSettingsConfig.brand.brand_name }}
+            </h3>
+          </a>
+        </li>
+        <li class="nav-item d-none d-md-block nav-toggle">
+          <a
+            [routerLink]=""
+            class="nav-link modern-nav-toggle pr-0"
+            data-toggle="collapse"
+            (click)="toggleFixMenu($event)"
+          >
+            <i
+              class="feather toggle-icon font-medium-3 white"
+              [ngClass]="{
+                'ft-toggle-left': _themeSettingsConfig.menu === 'collapse',
+                'ft-toggle-right': _themeSettingsConfig.menu === 'expand'
+              }"
+            ></i>
+          </a>
+        </li>
+        <li class="nav-item d-lg-none">
+          <a
+            class="nav-link open-navbar-container"
+            data-toggle="collapse"
+            data-target="#navbar-mobile"
+            (click)="toggleNavbar($event)"
+            ><i class="la la-ellipsis-v"></i
+          ></a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>

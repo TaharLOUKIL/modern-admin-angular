@@ -1,0 +1,83 @@
+<div (mouseenter)="mouseEnter($event)" (mouseleave)="mouseLeave($event)" id="main-menu"
+	class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
+	<div id="main-menu-content" class="main-menu-content ps-container ps-theme-light" fxFlex="auto"
+		[perfectScrollbar]="config">
+		<ul class="navigation navigation-main" id="main-menu-navigation" data-menu="menu-navigation">
+			<!-- Menu -->
+			{{child?child.title:''}}
+			<li *ngFor="let child of _menuSettingsConfig.vertical_menu.items" class="" [ngClass]="{
+            'has-sub': child.submenu,
+            'open': child.isOpen && child.submenu,
+            'nav-item': child.title,
+            'navigation-header':child.section,
+            'active': child.isSelected && !child.submenu,
+            'menu-collapsed-open': child.isSelected && child.submenu,
+            'hover': child.hover
+          }">
+				<!-- Section -->
+				<span class="menu-title" *ngIf="child.section">{{child.section}}</span>
+				<i class="la" *ngIf="child.section" [ngClass]="child.icon" data-toggle="tooltip" data-placement="right"
+					data-original-title="Support"></i>
+
+				<!-- Root Menu -->
+				<a *ngIf="child.title && !child.submenu && !child.excludeInVertical && !child.isExternalLink && !child.issupportExternalLink && !child.isStarterkitExternalLink"
+					routerLink="{{child.page !== 'null'?child.page:router.url}}" (click)="toggleMenu($event, child)">
+					<i class="la" [ngClass]="child.icon"></i>
+					<span class="menu-title" data-i18n="">{{child.title}}</span>
+					<span *ngIf="child.badge" class="badge badge-pill float-right"
+						[ngClass]="{'badge-info mr-2': child.badge.type==='badge-info' , 'badge-danger':child.badge.type==='badge-danger'}">
+						{{child.badge.value}}
+					</span>
+				</a>
+				<a *ngIf="child.title && !child.submenu && !child.excludeInVertical && child.isExternalLink"
+          [href]="child.page"  target="_blank" (click)="toggleMenu($event, child)">
+					<i class="la" [ngClass]="child.icon"></i>
+					<span class="menu-title" data-i18n="">{{child.title}}</span>
+					<span *ngIf="child.badge" class="badge badge-pill float-right"
+						[ngClass]="{'badge-info mr-2': child.badge.type==='badge-info' , 'badge-danger':child.badge.type==='badge-danger'}">
+						{{child.badge.value}}
+					</span>
+				</a>
+				<a *ngIf="child.title && !child.submenu && !child.excludeInVertical && child.isStarterkitExternalLink"
+          [href]="child.page"  target="_blank" (click)="toggleMenu($event, child)">
+					<i class="la" [ngClass]="child.icon"></i>
+					<span class="menu-title" data-i18n="">{{child.title}}</span>
+					<span *ngIf="child.badge" class="badge badge-pill float-right"
+						[ngClass]="{'badge-info mr-2': child.badge.type==='badge-info' , 'badge-danger':child.badge.type==='badge-danger'}">
+						{{child.badge.value}}
+					</span>
+				</a>
+
+
+				<!-- Submenu -->
+				<a *ngIf="child.title && child.submenu && !child.excludeInVertical"
+					routerLink="{{child.page !== 'null'?child.page:router.url}}" (click)="toggleMenu($event, child)">
+					<i class="la" [ngClass]="child.icon"></i>
+					<span class="menu-title" data-i18n="">{{child.title}}</span>
+					<span *ngIf="child.badge" class="badge badge-pill float-right"
+						[ngClass]="{'badge-info mr-2': child.badge.type==='badge-info' , 'badge-danger':child.badge.type==='badge-danger'}">
+						{{child.badge.value}}
+					</span>
+				</a>
+				<ul *ngIf="child.submenu" class="menu-content" [@popOverState]="child.isOpen">
+          <!-- Submenu of Submenu -->
+					<li *ngFor="let subchild of child.submenu.items" class="isShown"
+						[ngClass]="{'has-sub':(subchild.submenu),'active': subchild.isSelected && !subchild.submenu, 'open': subchild.isOpen && subchild.submenu}">
+						<a class="menu-item" *ngIf="!subchild.submenu && !subchild.excludeInVertical" (click)="toggleMenu($event, subchild, true)"
+							routerLink="{{subchild.page !== 'null'?subchild.page:router.url}}">{{subchild.title}}</a>
+						<a class="menu-item" *ngIf="subchild.submenu && !subchild.excludeInVertical" (click)="toggleMenu($event, subchild, true)"
+							routerLink="{{subchild.page !== 'null'?subchild.page:router.url}}">{{subchild.title}}</a>
+						<ul *ngIf="subchild.submenu && !subchild.excludeInVertical" class="menu-content">
+							<li *ngFor="let subchild of subchild.submenu.items" [ngClass]="{'active': subchild.isSelected && !subchild.submenu}">
+								<a class="menu-item" *ngIf="!subchild.event"
+									routerLink="{{subchild.page}}" (click)="toggleMenu($event, subchild, true)">{{subchild.title}}</a>
+								<a class="menu-item" *ngIf="subchild.event"
+									(click)="callFunction(subchild.event, subchild)">{{subchild.title}}</a>
+							</li>
+						</ul>
+					</li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+</div>

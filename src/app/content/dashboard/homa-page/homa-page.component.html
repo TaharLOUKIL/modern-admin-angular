@@ -1,0 +1,476 @@
+<div class="app-content content">
+  <div class="sidebar-left" id="sidebar-left">
+    <div class="sidebar">
+      <div class="todo-sidebar d-flex">
+        <span class="sidebar-close-icon">
+          <i class="ficon feather ft-x"></i>
+        </span>
+        <div class="todo-app-menu">
+          <div class="form-group text-center add-task">
+            <button
+              type="button"
+              class="btn btn-danger btn-glow add-task-btn btn-block my-1"
+              (click)="BorderModel(BorderModelContent)"
+            >
+              <i class="ficon feather ft-plus"></i>
+              <span>New flow</span>
+            </button>
+            <!-- Modal -->
+            <ng-template
+              class="modal border-pink text-left"
+              #BorderModelContent
+              let-c="close"
+              let-d="dismiss"
+            >
+              <form [formGroup]="AddGraphFrom" (ngSubmit)="onSubmit()">
+                <div class="modal-content border-pink">
+                  <div class="modal-header border-bottom-pink">
+                    <h4 class="modal-title" id="myModalLabel22">
+                      <i class="la la-tree"></i>Add Flow
+                    </h4>
+                    <button
+                      type="button"
+                      class="close"
+                      aria-label="Close"
+                      (click)="d('Cross click')"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h4 class="card-title">Name</h4>
+                    <div class="card-block">
+                      <div class="card-body">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="defaultInputText"
+                            formControlName="name"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      id="closemodel"
+                      type="button"
+                      (click)="d('Close modal')"
+                      class="btn grey btn-outline-secondary"
+                    >
+                      Close
+                    </button>
+                    <button
+                      type="submit"
+                      class="btn btn-outline-pink"
+                      [disabled]="!AddGraphFrom.valid"
+                    >
+                      Save changes
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </ng-template>
+          </div>
+          <div class="sidebar-menu-list" fxFlex="auto">
+            <div class="list-group">
+              <label class="filter-label mt-2 mb-1 pt-25">List of Flows</label>
+              <div class="list-group" *ngFor="let Graphs of listGraphs">
+                <a
+                  [routerLink]=""
+                  class="list-group-item border-0 d-flex align-items-center justify-content-between"
+                  (click)="SetDiagram(Graphs)"
+                  [ngClass]="{ active: active._id === Graphs._id }"
+                >
+                  <span>{{ Graphs.name }}</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="content-right">
+    <div class="content-overlay"></div>
+    <div class="content-wrapper">
+      <div class="content-header row"></div>
+      <div class="content-body">
+        <div class="app-content-overlay" id="content-overlay"></div>
+        <ngb-alert
+          *ngIf="isSuccessClosed"
+          [dismissible]="true"
+          [type]="'success'"
+          (close)="isSuccessClosed = true"
+          role="alert"
+          class="mb-2"
+        >
+          <strong>Succeess! </strong>
+          <a [routerLink]="" class="alert-link">
+            your flow has been successfully added</a
+          >
+        </ngb-alert>
+        <ngb-alert
+          *ngIf="isSuccessUpdate"
+          [dismissible]="true"
+          [type]="'success'"
+          (close)="isSuccessUpdate = true"
+          role="alert"
+          class="mb-2"
+        >
+          <strong>Succeess! </strong>
+          <a [routerLink]="" class="alert-link">
+            your flow successfully updated</a
+          >
+        </ngb-alert>
+        <div *ngIf="active._id != '0'">
+          <div class="form-group">
+            <button
+              type="button"
+              class="btn mr-1 mb-1 btn-success btn-lg"
+              (click)="addnode()"
+            >
+              Add Node
+            </button>
+            <button
+              type="button"
+              class="btn mr-1 mb-1 btn-danger btn-lg"
+              (click)="ClearNode()"
+            >
+              Clear Node
+            </button>
+            <button
+              type="button"
+              class="btn mr-1 mb-1 btn-success btn-lg"
+              (click)="Savegojs()"
+            >
+              Save Gojs
+            </button>
+            <button
+              type="button"
+              (mouseup)="CopyDetails()"
+              [cdkCopyToClipboard]="copyToClipboard"
+              class="btn mr-1 mb-1 btn-danger btn-lg"
+            >
+              Save Botpress
+            </button>
+          </div>
+        </div>
+        <div>
+          <!--Bot press model-->
+          <ng-template
+            class="modal border-pink text-left"
+            #BorderModelContentforbotpress
+            let-c="close"
+            let-d="dismiss"
+          >
+            <div class="modal-content border-pink">
+              <div class="modal-header border-bottom-pink">
+                <h4 class="modal-title" id="myModalLabel22">
+                  <i class="la la-tree"></i>Add Flow
+                </h4>
+                <button
+                  type="button"
+                  class="close"
+                  aria-label="Close"
+                  (click)="d('Cross click')"
+                >
+                  <span aria-hidden="true">&times;</span>
+                </button>
+              </div>
+              <div class="modal-body">
+                <h4 class="card-title">type</h4>
+                <div class="card-block">
+                  <ng-select
+                    [items]="taggingSupportArray"
+                    [addTag]="true"
+                    bindLabel="Type"
+                    bindValue="id"
+                    placeholder="Select your type"
+                    [(ngModel)]="selectedTag"
+                    (change)="onChange()"
+                  >
+                  </ng-select>
+                </div>
+
+                <h4 class="card-title">Content</h4>
+                <div class="card-block" *ngIf="selectedTag == 1">
+                  <ng-select
+                    [items]="listcontent"
+                    [addTag]="true"
+                    bindLabel="message"
+                    bindValue="_id"
+                    placeholder="Select your content"
+                    [(ngModel)]="selectedcontent"
+                    (change)="onChangeContent($event)"
+                  >
+                  </ng-select>
+                </div>
+                <div class="card-block" *ngIf="selectedTag != 1">
+                  <ng-select
+                    [items]="listcontent"
+                    [addTag]="true"
+                    bindLabel="Titre"
+                    bindValue="_id"
+                    placeholder="Select your content"
+                    [(ngModel)]="selectedcontent"
+                    (change)="onChangeContent($event)"
+                  >
+                  </ng-select>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  id="closeBotPress"
+                  type="button"
+                  (click)="d('Close modal')"
+                  class="btn grey btn-outline-secondary"
+                >
+                  Close
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-outline-pink"
+                  [disabled]="selectedcontent == 0 || selectedTag == 0"
+                  (click)="saveAction()"
+                >
+                  Save changes
+                </button>
+              </div>
+            </div>
+          </ng-template>
+
+          <!--Node Properties-->
+          <div class="row">
+            <div
+              [ngClass]="isSelected ? 'col-8' : 'col-12'"
+              id="myDiagramDiv"
+            ></div>
+            <div
+              *ngIf="isSelected"
+              class="col-4"
+              style="overflow-wrap: anywhere"
+            >
+              <section id="tabs-with-icons">
+                <div class="row" matchHeight="card" style="width: 100%">
+                  <div class="col-lg-12">
+                    <div class="card">
+                      <div class="card-header">
+                        <h4 class="card-title">Node Prperties</h4>
+                      </div>
+                      <div class="card-content">
+                        <div class="card-body">
+                          <ul class="nav tabsborder">
+                            <ngb-tabset>
+                              <ngb-tab>
+                                <ng-template ngbTabTitle
+                                  ><i class="la la-play"></i>On
+                                  Recieve</ng-template
+                                >
+                                <ng-template
+                                  ngbTabContent
+                                  style="overflow-wrap: anywhere"
+                                >
+                                  <div>
+                                    <div style="text-align: center">
+                                      <button
+                                        type="button"
+                                        class="btn btn-icon btn-success mr-1"
+                                        (click)="
+                                          BorderModelBotPress(
+                                            BorderModelContentforbotpress,
+                                            'OnRecieve'
+                                          )
+                                        "
+                                      >
+                                        <i class="la la-plus"></i>
+                                      </button>
+                                    </div>
+
+                                    <div class="email-user-list list-group">
+                                      <ul class="users-list-wrapper media-list">
+                                        <li
+                                          *ngFor="
+                                            let x of selectedNode.onRecieve
+                                          "
+                                        >
+                                          <div
+                                            *ngIf="x?.type == 'Text'"
+                                            class="user-action"
+                                          >
+                                            <label
+                                              >{{ x.type }} :
+                                              {{ x.message }}</label
+                                            >
+                                            <i
+                                              class="la la-trash-o text-danger"
+                                              (click)="Delete(x, 'onRecieve')"
+                                            ></i>
+                                          </div>
+                                          <div
+                                            *ngIf="x?.type != 'Text'"
+                                            class="user-action"
+                                          >
+                                            <a
+                                              href="{{ x.url }}"
+                                              target="_blank"
+                                              style="overflow-wrap: anywhere"
+                                              >{{ x.type }} : {{ x.Titre }}</a
+                                            >
+                                            <i
+                                              class="la la-trash-o text-danger"
+                                              (click)="Delete(x, 'onRecieve')"
+                                            ></i>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </ng-template>
+                              </ngb-tab>
+                              <ngb-tab>
+                                <ng-template ngbTabTitle>
+                                  <i class="la la-flag"></i
+                                  >Transition</ng-template
+                                >
+                                <ng-template
+                                  ngbTabContent
+                                  style="overflow-wrap: anywhere"
+                                >
+                                  <div>
+                                    <div style="text-align: center">
+                                      <button
+                                        type="button"
+                                        style="margin-right: 50px"
+                                        class="btn btn-icon btn-success mr-1"
+                                        (click)="
+                                          BorderModelBotPress(
+                                            BorderModelContentforbotpress,
+                                            'Transition'
+                                          )
+                                        "
+                                      >
+                                        <i class="la la-plus"></i>
+                                      </button>
+                                    </div>
+                                    <div class="email-user-list list-group">
+                                      <ul class="users-list-wrapper media-list">
+                                        <li
+                                          *ngFor="
+                                            let x of selectedNode.transition
+                                          "
+                                        >
+                                          <div
+                                            *ngIf="x?.type == 'Text'"
+                                            class="user-action"
+                                          >
+                                            <label
+                                              >{{ x.type }} :
+                                              {{ x.message }}</label
+                                            >
+                                            <i
+                                              class="la la-trash-o text-danger"
+                                              (click)="Delete(x, 'transition')"
+                                            ></i>
+                                          </div>
+                                          <div
+                                            *ngIf="x?.type != 'Text'"
+                                            class="user-action"
+                                          >
+                                            <a
+                                              href="{{ x.url }}"
+                                              target="_blank"
+                                              style="overflow-wrap: anywhere"
+                                              >{{ x.type }} : {{ x.Titre }}</a
+                                            >
+                                            <i
+                                              class="la la-trash-o text-danger"
+                                              (click)="Delete(x, 'transition')"
+                                            ></i>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </ng-template>
+                              </ngb-tab>
+                              <ngb-tab>
+                                <ng-template ngbTabTitle
+                                  ><i class="la la-cog"></i>On
+                                  enter</ng-template
+                                >
+                                <ng-template
+                                  ngbTabContent
+                                  style="overflow-wrap: anywhere"
+                                >
+                                  <div>
+                                    <div style="text-align: center">
+                                      <button
+                                        type="button"
+                                        class="btn btn-icon btn-success mr-1"
+                                        (click)="
+                                          BorderModelBotPress(
+                                            BorderModelContentforbotpress,
+                                            'OnEnter'
+                                          )
+                                        "
+                                      >
+                                        <i class="la la-plus"></i>
+                                      </button>
+                                    </div>
+
+                                    <div class="email-user-list list-group">
+                                      <ul class="users-list-wrapper media-list">
+                                        <li
+                                          *ngFor="let x of selectedNode.onEnter"
+                                        >
+                                          <div
+                                            *ngIf="x?.type == 'Text'"
+                                            class="user-action"
+                                          >
+                                            <label
+                                              >{{ x.type }} :
+                                              {{ x.message }}</label
+                                            >
+                                            <i
+                                              class="la la-trash-o text-danger"
+                                              (click)="Delete(x, 'onEnter')"
+                                            ></i>
+                                          </div>
+                                          <div
+                                            *ngIf="x?.type != 'Text'"
+                                            class="user-action"
+                                          >
+                                            <a
+                                              href="{{ x.url }}"
+                                              target="_blank"
+                                              style="overflow-wrap: anywhere"
+                                              >{{ x.type }} : {{ x.Titre }}</a
+                                            >
+                                            <i
+                                              class="la la-trash-o text-danger"
+                                              (click)="Delete(x, 'onEnter')"
+                                            ></i>
+                                          </div>
+                                        </li>
+                                      </ul>
+                                    </div>
+                                  </div>
+                                </ng-template>
+                              </ngb-tab>
+                            </ngb-tabset>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

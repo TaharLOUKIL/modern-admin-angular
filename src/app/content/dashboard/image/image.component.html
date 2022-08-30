@@ -1,0 +1,281 @@
+<div class="app-content content">
+  <div class="content-wrapper">
+    <ngb-alert
+      *ngIf="isSuccessDeleted"
+      [dismissible]="true"
+      [type]="'success'"
+      (close)="isSuccessDeleted = true"
+      role="alert"
+      class="mb-2"
+    >
+      <strong>Succeess! </strong>
+      <a [routerLink]="" class="alert-link">
+        your Image has been successfully deleted</a
+      >
+    </ngb-alert>
+    <ngb-alert
+      *ngIf="isSuccessAdded"
+      [dismissible]="true"
+      [type]="'success'"
+      (close)="isSuccessAdded = true"
+      role="alert"
+      class="mb-2"
+    >
+      <strong>Succeess! </strong>
+      <a [routerLink]="" class="alert-link">
+        your Image has been successfully added</a
+      >
+    </ngb-alert>
+    <ngb-alert
+      *ngIf="isSuccessModified"
+      [dismissible]="true"
+      [type]="'success'"
+      (close)="isSuccessModified = true"
+      role="alert"
+      class="mb-2"
+    >
+      <strong>Succeess! </strong>
+      <a [routerLink]="" class="alert-link"
+        >your Image has been successfully modified</a
+      >
+    </ngb-alert>
+    <ng-template
+      class="modal border-pink text-left"
+      #BorderModelContent
+      let-c="close"
+      let-d="dismiss"
+    >
+      <form [formGroup]="AddImage" (ngSubmit)="onSubmit()">
+        <div class="modal-content border-pink">
+          <div class="modal-header border-bottom-pink">
+            <h4
+              *ngIf="!AddImage.value.Id"
+              class="modal-title"
+              id="myModalLabel22"
+            >
+              <i class="la la-tree"></i>Add Image
+            </h4>
+            <h4
+              *ngIf="AddImage.value.Id"
+              class="modal-title"
+              id="myModalLabel22"
+            >
+              <i class="la la-tree"></i>Update Image
+            </h4>
+            <button
+              type="button"
+              class="close"
+              aria-label="Close"
+              (click)="close()"
+            >
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div class="card-block">
+              <div class="card-body">
+                <div class="form-group">
+                  <input
+                    type="hidden"
+                    class="form-control"
+                    id="defaultInputText"
+                    formControlName="Id"
+                  />
+                  <h4 class="card-title">Title</h4>
+                  <input
+                    type="text"
+                    class="form-control"
+                    id="defaultInputText"
+                    formControlName="titre"
+                  />
+                  <input type="checkbox" formControlName="isurl" />
+                  is URL
+                  <div *ngIf="AddImage.value.isurl">
+                    <h4 class="card-title">url</h4>
+                    <input
+                      type="text"
+                      class="form-control"
+                      id="defaultInputText"
+                      formControlName="url"
+                    />
+                  </div>
+
+                  <div
+                    class="row"
+                    style="margin-bottom: 15px"
+                    *ngIf="!AddImage.value.isurl"
+                  >
+                    <div class="col-md-3">
+                      <input
+                        accept=".bmp,.jpg,.jpeg,.png,.gif,.tiff "
+                        type="file"
+                        #file
+                        placeholder="Choose file"
+                        (change)="changefile(file.files)"
+                      />
+                    </div>
+                    <div class="col-md-4">
+                      <span class="upload" *ngIf="progress > 0">
+                        {{ progress }}%
+                      </span>
+                      <span class="upload" *ngIf="message">
+                        {{ message }}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button
+              style="display: none"
+              id="closemodal"
+              type="button"
+              (click)="d('Close modal')"
+              class="btn grey btn-outline-secondary"
+            >
+              Close
+            </button>
+            <button
+              type="button"
+              (click)="close()"
+              class="btn grey btn-outline-secondary"
+            >
+              Close
+            </button>
+            <button
+              type="submit"
+              class="btn btn-outline-pink"
+              [disabled]="
+                !AddImage.valid ||
+                (AddImage.value.url == '' && AddImage.value.isurl) ||
+                (files == null && !AddImage.value.isurl)
+              "
+            >
+              Save changes
+            </button>
+          </div>
+        </div>
+      </form>
+    </ng-template>
+    <div class="row">
+      <div class="col-sm-12" *blockUI="'basicTables'; message: 'Loading'">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">Image Management</h4>
+          </div>
+          <div class="card-body">
+            <button
+              (click)="BorderModel(BorderModelContent)"
+              id="Addclick"
+              type="button"
+              class="btn btn-success btn-min-width mr-1 mb-1"
+            >
+              New Image
+            </button>
+          </div>
+          <div class="table-responsive card-body">
+            <form>
+              <div class="form-group form-inline">
+                Full Image search:
+                <input
+                  class="form-control ml-2"
+                  type="text"
+                  name="searchTerm"
+                  [(ngModel)]="searchTerm"
+                />
+                <span class="ml-3" *ngIf="loading">Loading...</span>
+              </div>
+
+              <table class="table table-striped">
+                <thead>
+                  <tr>
+                    <th scope="col">#</th>
+                    <th
+                      scope="col"
+                      sortable="firstname"
+                      (sort)="onSort($event)"
+                    >
+                      ID
+                    </th>
+                    <th scope="col" sortable="lastname" (sort)="onSort($event)">
+                      Type
+                    </th>
+                    <th scope="col" sortable="username" (sort)="onSort($event)">
+                      Overview
+                    </th>
+                    <th scope="col" sortable="username" (sort)="onSort($event)">
+                      Created At
+                    </th>
+                    <th scope="col" sortable="username" (sort)="onSort($event)">
+                      Updated At
+                    </th>
+                    <th
+                      scope="col"
+                      sortable="username"
+                      (sort)="onSort($event)"
+                    ></th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let element of rows">
+                    <th scope="row"></th>
+                    <td>
+                      <ngb-highlight
+                        [result]="element._id"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        result="Image"
+                        [term]="searchTerm"
+                      ></ngb-highlight>
+                    </td>
+                    <td>
+                      <img
+                        style="height: 100px; width: 100px"
+                        [src]="element.url"
+                      />
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="element.createdAt"
+                        [term]="searchTerm"
+                      >
+                      </ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="element.modifiedAt"
+                        [term]="searchTerm"
+                      >
+                      </ngb-highlight>
+                    </td>
+                    <td>
+                      <button
+                        type="button"
+                        (click)="UpdateTexte(element)"
+                        class="btn btn-info btn-min-width mr-1 mb-1"
+                      >
+                        Update
+                      </button>
+                      <button
+                        type="button"
+                        (click)="clickMethod(element)"
+                        class="btn btn-danger btn-min-width mr-1 mb-1"
+                      >
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

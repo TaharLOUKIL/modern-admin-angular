@@ -1,0 +1,110 @@
+<div class="app-content content">
+  <div class="content-overlay"></div>
+  <div class="content-wrapper">
+    <div class="content-header row"></div>
+    <div class="content-body">
+      <ngb-alert
+        *ngIf="isSuccessClosed"
+        [dismissible]="true"
+        [type]="'success'"
+        (close)="isSuccessClosed = true"
+        role="alert"
+        class="mb-2"
+      >
+        <strong>Succeess! </strong>
+        <a [routerLink]="" class="alert-link"> your bot successfully added</a>
+      </ngb-alert>
+      <div style="padding-top: 100px" class="col-12 col-md-12">
+        <div class="card">
+          <div class="card-header">
+            <h4 class="card-title">List of Bots</h4>
+            <div class="text-right border-top-0">
+              <button
+                type="button"
+                style="margin-top: -25px"
+                class="btn btn-icon btn-success mr-1"
+                (click)="BorderModel(BorderModelContent)"
+              >
+                <i class="la la-plus"></i>
+              </button>
+            </div>
+            <ng-template
+              class="modal border-pink text-left"
+              #BorderModelContent
+              let-c="close"
+              let-d="dismiss"
+            >
+              <form [formGroup]="Addbot" (ngSubmit)="onSubmit()">
+                <div class="modal-content border-pink">
+                  <div class="modal-header border-bottom-pink">
+                    <h4 class="modal-title" id="myModalLabel22">
+                      <i class="la la-tree"></i>Add Bot
+                    </h4>
+                    <button
+                      type="button"
+                      class="close"
+                      aria-label="Close"
+                      (click)="d('Cross click')"
+                    >
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>
+                  <div class="modal-body">
+                    <h4 class="card-title">Name</h4>
+                    <div class="card-block">
+                      <div class="card-body">
+                        <div class="form-group">
+                          <input
+                            type="text"
+                            class="form-control"
+                            id="defaultInputText"
+                            formControlName="name"
+                          />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      id="closemodel"
+                      type="button"
+                      (click)="d('Close modal')"
+                      class="btn grey btn-outline-secondary"
+                    >
+                      Close
+                    </button>
+                    <button type="submit" class="btn btn-outline-pink">
+                      Save changes
+                    </button>
+                  </div>
+                </div>
+              </form>
+            </ng-template>
+          </div>
+          <div class="card-content">
+            <div class="table-responsive">
+              <table id="recent-orders" class="table table-hover table-xl mb-0">
+                <tbody>
+                  <tr *ngFor="let bot of bots">
+                    <td class="text-truncate pl-0 border-top-0">
+                      <div class="name" style="margin-left: 50px">
+                        {{ bot.name }}
+                      </div>
+                    </td>
+                    <td class="text-right border-top-0">
+                      <a
+                        (click)="navigate(bot)"
+                        class="btn btn-sm btn-outline-success"
+                        >View Bot</a
+                      >
+                    </td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

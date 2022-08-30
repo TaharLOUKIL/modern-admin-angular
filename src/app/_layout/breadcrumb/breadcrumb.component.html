@@ -1,0 +1,27 @@
+<div class="row">
+  <div class="content-header-left col-md-6 col-12 mb-2 breadcrumb-new" *ngIf="breadcrumb">
+    <h3 class="content-header-title mb-0 d-inline-block">{{breadcrumb.mainlabel}}</h3>
+    <div class="row breadcrumbs-top d-inline-block">
+      <div class="breadcrumb-wrapper col-12">
+        <ol class="breadcrumb">
+          <li class="breadcrumb-item" *ngFor="let link of breadcrumb.links">
+            <a *ngIf="link.isLink" routerLink="{{link.link}}">{{link.name}}</a>
+            <span *ngIf="!link.isLink">{{link.name}}</span>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </div>
+  <div class="content-header-right col-md-6 col-12">
+    <div  class="d-inline-block float-md-right" ngbDropdown>
+      <button class="btn btn-info" id="dropdownBasic1" ngbDropdownToggle>Action</button>
+      <div ngbDropdownMenu class="arrow _dropdown_mob dropdown-menu-right" aria-labelledby="dropdownBasic1">
+        <button class="dropdown-item">Calender</button>
+        <button class="dropdown-item">Cart</button>
+        <button class="dropdown-item">Support</button>
+        <div class="dropdown-divider"></div>
+        <button class="dropdown-item">Settings</button>
+      </div>
+    </div>
+  </div>
+</div>

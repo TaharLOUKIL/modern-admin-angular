@@ -1,0 +1,311 @@
+:host ::ng-deep .todo-app-menu {
+  width: 100% !important;
+  padding: 0.5rem 0;
+}
+:host ::ng-deep .ml-25 {
+  margin-left: 0.25rem !important;
+}
+:host ::ng-deep .todo-sidebar .todo-app-menu .sidebar-menu-list .filter-label {
+  font-family: Quicksand, Georgia, 'Times New Roman', Times, serif;
+  letter-spacing: 1px;
+  color: #bac0c7;
+}
+:host ::ng-deep .border {
+  border: 1px solid #dde1e6 !important;
+}
+:host ::ng-deep .ql-container.ql-snow {
+  border: 0px solid #ccc;
+}
+:host ::ng-deep .ql-toolbar.ql-snow {
+  border: 0px solid #ccc;
+}
+:host ::ng-deep .btn-primary {
+  height: fit-content;
+  margin-right: 7px;
+}
+:host ::ng-deep .new-taskDropdown::after {
+  content: '' !important;
+}
+
+:host ::ng-deep .show > .dropdownnew-task {
+  left: -166px !important;
+}
+:host ::ng-deep .show > .dropdown-sort {
+  left: -48px !important;
+}
+@media (max-width: 991.98px) {
+  .app-content .content-right {
+    width: 100% !important;
+  }
+}
+:host ::ng-deep .py-75 {
+  padding-top: 0.75rem !important;
+}
+:host ::ng-deep .py-75 {
+  padding-bottom: 0.75rem !important;
+}
+:host ::ng-deep .ImageUpload {
+  width: 10%;
+  hight: 10%;
+}
+:host ::ng-deep .add-todo {
+  margin-left: 10px;
+}
+:host ::ng-deep .todo-new-task-sidebar .avatar i {
+  right: 18px;
+  bottom: 18px;
+}
+:host ::ng-deep .ng-dropdown-panel .ng-dropdown-panel-items {
+  width: fit-content !important;
+}
+:host ::ng-deep .ng-select {
+  width: 130px;
+}
+
+@media (max-width: 349.98px) {
+  .sidebar .todo-sidebar {
+    width: 230px;
+  }
+}
+@media (max-width: 575.98px) {
+  .todo-new-task-sidebar {
+    width: 88%;
+  }
+}
+:host ::ng-deep .gradient-mint {
+  background-image: linear-gradient(45deg, #28d094, #28d094) !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+:host ::ng-deep .gradient-primary {
+  background-image: linear-gradient(45deg, #666ee8, #666ee8) !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+:host ::ng-deep .gradient-warning {
+  background-image: linear-gradient(45deg, #ff9149, #ff9149) !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+:host ::ng-deep .gradient-danger {
+  background-image: linear-gradient(45deg, #ff4961, #ff4961) !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+:host ::ng-deep .gradient-info {
+  background-image: linear-gradient(45deg, #1e9ff2, #1e9ff2) !important;
+  width: 10px !important;
+  height: 10px !important;
+}
+/* date picker css */
+:host ::ng-deep .btn-light:not(:disabled):not(.disabled):active {
+  color: unset !important;
+  background-color: unset !important;
+  border-color: #d3d9df !important;
+}
+
+:host ::ng-deep .btn-light:hover:not(.disabled):active {
+  background-color: #e2e6ea !important;
+  border-color: #dae0e5 !important;
+}
+
+:host ::ng-deep .btn-light {
+  color: unset !important;
+  background-color: unset !important;
+  border-color: unset !important;
+}
+
+:host ::ng-deep .bg-primary {
+  background-color: #007bff !important;
+}
+
+:host ::ng-deep .text-white {
+  color: #fff !important;
+}
+
+:host ::ng-deep .custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+
+:host ::ng-deep .custom-day:active {
+  color: #6d7183 !important;
+  background-color: #fff !important;
+  border-block-color: rgb(2, 117, 216) !important;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+:host ::ng-deep .hidden {
+  display: block !important;
+}
+
+.ngb-dp-weekday {
+  color: #17a2b8;
+}
+
+.ngb-dp-week-number,
+.ngb-dp-weekday {
+  line-height: 2rem;
+  text-align: center;
+  font-style: italic;
+}
+
+.ngb-datepicker-month-view {
+  pointer-events: auto;
+}
+
+.small {
+  font-size: 80%;
+  font-weight: 400;
+}
+
+.ngb-dp-day {
+  cursor: pointer !important;
+}
+
+.ngb-dp-month {
+  pointer-events: none;
+}
+
+.btn-light:hover {
+  color: #212529 !important;
+  background-color: #e2e6ea !important;
+  border-color: #dae0e5 !important;
+}
+
+.ngb-datepicker-month-view {
+  pointer-events: auto;
+}
+
+.ngb-dp-header {
+  border-bottom: 0;
+  border-radius: 0.25rem 0.25rem 0 0;
+  padding-top: 0.25rem;
+}
+
+.ngb-dp-day,
+.ngb-dp-week-number,
+.ngb-dp-weekday {
+  width: 2rem;
+  height: 2rem;
+}
+
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  display: inline-block;
+  height: 2rem;
+  width: 2rem;
+}
+
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+
+.custom-day.range,
+.custom-day:hover {
+  background-color: rgb(2, 117, 216);
+  color: white;
+}
+
+.custom-day.faded {
+  background-color: rgba(2, 117, 216, 0.5);
+}
+
+:host ::ng-deep .block-ui-wrapper {
+  background: rgba(255, 249, 249, 0.5) !important;
+}
+
+.custom-day {
+  text-align: center;
+  padding: 0.185rem 0.25rem;
+  border-radius: 0.25rem;
+  display: inline-block;
+  width: 2rem;
+}
+.custom-day:hover,
+.custom-day.focused {
+  background-color: #e6e6e6;
+}
+.weekend {
+  background-color: #f0ad4e;
+  border-radius: 1rem;
+  color: white;
+}
+.hidden {
+  display: none;
+}
+:host ::ng-deep .ft-calendar {
+  font-family: feather !important;
+  speak: none;
+  font-style: normal;
+  font-weight: 400;
+  font-size: large;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+:host ::ng-deep .input-group-text {
+  display: flex;
+  align-items: center;
+  padding: unset !important;
+  margin-bottom: unset !important;
+  font-size: unset !important;
+  font-weight: unset !important;
+  line-height: unset !important;
+  color: unset !important;
+  text-align: unset !important;
+  white-space: unset !important;
+  background-color: unset !important;
+  border: unset !important;
+  border-radius: unset !important;
+}
+.ml-75,
+.mx-75 {
+  margin-left: 0.75rem !important;
+}
+.mx-50 {
+  margin-left: 0.5rem !important;
+}
+.sidebar {
+  width: 270px !important;
+}
+.align-middle {
+  margin-left: 3px;
+}
+.mr-50,
+.mx-50 {
+  margin-right: 0.5rem !important;
+}
+:host ::ng-deep .ft-plus {
+  margin-right: 3px !important;
+}
+control:disabled,
+.form-control[readonly] {
+  background-color: #ffffff;
+  margin-left: -12px;
+}
+
+#myDiagramDiv {
+  width: 100%;
+  height: 500px;
+  border: 1px solid black;
+  background-color: #dae4e4;
+}
+
+:host ::ng-deep .block-ui-wrapper {
+  background: rgba(255, 249, 249, 0.5) !important;
+}
+
+:host ::ng-deep .close:not(:disabled):not(.disabled):hover,
+.close:not(:disabled):not(.disabled):focus {
+  outline: none !important;
+}
