@@ -1,0 +1,20 @@
+//	===============================================================================================
+//  File Name: horizontal.scss
+//  Description: Horizontal layout SASS file for layout related changes only
+//  ----------------------------------------------------------------------------------------------
+//    Item Name: Item Name: Modern Admin -Angular 11+ Bootstrap 5 Admin Dashboard Template
+//    Version: 3.0
+//  Author: PIXINVENT
+//  Author URL: http://www.themeforest.net/user/pixinvent
+// ================================================================================================
+
+.horizontal-menu-padding{
+	.header-navbar {
+		.navbar-container{
+			padding: 0;
+		}
+	}
+}
+.header-navbar .navbar-container{
+	height: auto;
+}
