@@ -1,10 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpEventType,
+} from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Audio } from 'src/app/Models/Text';
+import { Audio } from 'src/app/Models/Texte';
 import { environment } from 'src/environments/environment';
 import { AudioService } from '../services/Audio.service';
+import { ImageService } from '../services/Image.service';
 
 @Component({
   selector: 'app-audio',
@@ -24,11 +29,11 @@ export class AudioComponent implements OnInit {
   pageSize = 2;
   modified: Audio = {
     _id: '',
-    Type: '',
-    CreatedAt: new Date(),
-    ModifiedAt: new Date(),
+    type: '',
+    createdAt: new Date(),
+    modifiedAt: new Date(),
     Titre: '',
-    Url: '',
+    url: '',
   };
   isSuccessAdded = false;
   isSuccessModified = false;
@@ -60,7 +65,7 @@ export class AudioComponent implements OnInit {
     this.AddAudio.setValue({
       Id: element._id,
       titre: element.Titre,
-      url: element.Url,
+      url: element.url,
       isurl: true,
     });
     document.getElementById('Addclick').click();
@@ -99,14 +104,14 @@ export class AudioComponent implements OnInit {
         formData.append('url', '');
       }
       formData.append('Titre', form.titre);
-      formData.append('createdAt', this.modified.CreatedAt.toString());
+      formData.append('createdAt', this.modified.createdAt.toString());
       formData.append('ID', this.modified._id);
       this.http
         .put(environment.apiUrl + 'audio', formData)
         .subscribe((res: Audio[]) => {
           this.rows = res;
           this.isSuccessModified = true;
-          this.resetform();
+          this.AddAudio.reset();
           setTimeout(() => {
             this.isSuccessModified = false;
           }, environment.duration);
@@ -127,7 +132,7 @@ export class AudioComponent implements OnInit {
         .subscribe((res: Audio[]) => {
           this.rows = res;
           this.isSuccessAdded = true;
-          this.resetform();
+          this.AddAudio.reset();
           setTimeout(() => {
             this.isSuccessAdded = false;
           }, environment.duration);

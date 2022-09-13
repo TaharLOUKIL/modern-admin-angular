@@ -234,20 +234,20 @@
                       ></ngb-highlight>
                     </td>
                     <td>
-                      <a target="_blank" [href]="element.Url">
-                        {{ element.Url }}</a
+                      <a target="_blank" [href]="element.url">
+                        {{ element.url }}</a
                       >
                     </td>
                     <td>
                       <ngb-highlight
-                        [result]="element.CreatedAt"
+                        [result]="element.createdAt"
                         [term]="searchTerm"
                       >
                       </ngb-highlight>
                     </td>
                     <td>
                       <ngb-highlight
-                        [result]="element.ModifiedAt"
+                        [result]="element.modifiedAt"
                         [term]="searchTerm"
                       >
                       </ngb-highlight>
