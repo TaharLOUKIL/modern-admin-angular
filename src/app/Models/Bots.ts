@@ -1,4 +1,4 @@
 export interface bots {
   _id: string;
-  name: string;
+  Name: string;
 }
