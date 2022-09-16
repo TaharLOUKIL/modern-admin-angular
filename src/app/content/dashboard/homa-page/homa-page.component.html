@@ -199,7 +199,7 @@
                   <ng-select
                     [items]="listcontent"
                     [addTag]="true"
-                    bindLabel="message"
+                    bindLabel="Message"
                     bindValue="_id"
                     placeholder="Select your content"
                     [(ngModel)]="selectedcontent"
@@ -296,12 +296,12 @@
                                           "
                                         >
                                           <div
-                                            *ngIf="x?.type == 'Text'"
+                                            *ngIf="x?.Type == 'Text'"
                                             class="user-action"
                                           >
                                             <label
-                                              >{{ x.type }} :
-                                              {{ x.message }}</label
+                                              >{{ x.Type }} :
+                                              {{ x.Message }}</label
                                             >
                                             <i
                                               class="la la-trash-o text-danger"
@@ -309,14 +309,14 @@
                                             ></i>
                                           </div>
                                           <div
-                                            *ngIf="x?.type != 'Text'"
+                                            *ngIf="x?.Type != 'Text'"
                                             class="user-action"
                                           >
                                             <a
-                                              href="{{ x.url }}"
+                                              href="{{ x.Url }}"
                                               target="_blank"
                                               style="overflow-wrap: anywhere"
-                                              >{{ x.type }} : {{ x.Titre }}</a
+                                              >{{ x.Type }} : {{ x.Titre }}</a
                                             >
                                             <i
                                               class="la la-trash-o text-danger"
@@ -362,12 +362,12 @@
                                           "
                                         >
                                           <div
-                                            *ngIf="x?.type == 'Text'"
+                                            *ngIf="x?.Type == 'Text'"
                                             class="user-action"
                                           >
                                             <label
-                                              >{{ x.type }} :
-                                              {{ x.message }}</label
+                                              >{{ x.Type }} :
+                                              {{ x.Message }}</label
                                             >
                                             <i
                                               class="la la-trash-o text-danger"
@@ -375,14 +375,14 @@
                                             ></i>
                                           </div>
                                           <div
-                                            *ngIf="x?.type != 'Text'"
+                                            *ngIf="x?.Type != 'Text'"
                                             class="user-action"
                                           >
                                             <a
-                                              href="{{ x.url }}"
+                                              href="{{ x.Url }}"
                                               target="_blank"
                                               style="overflow-wrap: anywhere"
-                                              >{{ x.type }} : {{ x.Titre }}</a
+                                              >{{ x.Type }} : {{ x.Titre }}</a
                                             >
                                             <i
                                               class="la la-trash-o text-danger"
@@ -426,12 +426,12 @@
                                           *ngFor="let x of selectedNode.onEnter"
                                         >
                                           <div
-                                            *ngIf="x?.type == 'Text'"
+                                            *ngIf="x?.Type == 'Text'"
                                             class="user-action"
                                           >
                                             <label
-                                              >{{ x.type }} :
-                                              {{ x.message }}</label
+                                              >{{ x.Type }} :
+                                              {{ x.Message }}</label
                                             >
                                             <i
                                               class="la la-trash-o text-danger"
@@ -443,10 +443,10 @@
                                             class="user-action"
                                           >
                                             <a
-                                              href="{{ x.url }}"
+                                              href="{{ x.Url }}"
                                               target="_blank"
                                               style="overflow-wrap: anywhere"
-                                              >{{ x.type }} : {{ x.Titre }}</a
+                                              >{{ x.Type }} : {{ x.Titre }}</a
                                             >
                                             <i
                                               class="la la-trash-o text-danger"

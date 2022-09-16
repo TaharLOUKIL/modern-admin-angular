@@ -4,11 +4,9 @@ import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import * as go from 'gojs';
-import { throwError } from 'rxjs';
 import { DataObject, NodeDataArray, Object } from 'src/app/Models/Data';
-import { AllType } from 'src/app/Models/Texte';
+import { AllType } from 'src/app/Models/Text';
 import { environment } from 'src/environments/environment';
-import { Z_UNKNOWN } from 'zlib';
 import { AllTypeService } from '../services/Alltype.service';
 import { DashbooardService } from '../services/dashbooard.service';
 
@@ -70,11 +68,13 @@ export class HomaPageComponent implements OnInit {
     this.botid = this.route.snapshot.params.id;
     // load list of flows
     this.dashboardservice.getData(this.botid).subscribe((res: DataObject[]) => {
+      console.log(res);
       this.listGraphs = res;
     });
 
     // load list of contents
     this.botpressservice.getData().subscribe((res: AllType) => {
+      console.log(res);
       this.AllType = res;
     });
   }
@@ -94,7 +94,7 @@ export class HomaPageComponent implements OnInit {
       go.Node,
       { resizable: true },
       'Auto',
-      // 
+      //
       new go.Binding('location', 'location', go.Point.parse).makeTwoWay(
         go.Point.stringify
       ),
@@ -160,10 +160,10 @@ export class HomaPageComponent implements OnInit {
               $(
                 go.TextBlock,
                 new go.Binding('text', '', function (data) {
-                  if (data.type == 'Text') {
-                    return data.type + ' : ' + data.message;
+                  if (data.Type == 'Text') {
+                    return data.Type + ' : ' + data.Message;
                   } else {
-                    return data.type + ' : ' + data.Titre;
+                    return data.Type + ' : ' + data.Titre;
                   }
                 })
               )
@@ -206,10 +206,10 @@ export class HomaPageComponent implements OnInit {
               $(
                 go.TextBlock,
                 new go.Binding('text', '', function (data) {
-                  if (data.type == 'Text') {
-                    return data.type + ' : ' + data.message;
+                  if (data.Type == 'Text') {
+                    return data.Type + ' : ' + data.Message;
                   } else {
-                    return data.type + ' : ' + data.Titre;
+                    return data.Type + ' : ' + data.Titre;
                   }
                 })
               )
@@ -252,10 +252,10 @@ export class HomaPageComponent implements OnInit {
               $(
                 go.TextBlock,
                 new go.Binding('text', '', function (data) {
-                  if (data.type == 'Text') {
-                    return data.type + ' : ' + data.message;
+                  if (data.Type == 'Text') {
+                    return data.Type + ' : ' + data.Message;
                   } else {
-                    return data.type + ' : ' + data.Titre;
+                    return data.Type + ' : ' + data.Titre;
                   }
                 })
               )
@@ -329,14 +329,14 @@ export class HomaPageComponent implements OnInit {
       })
       .subscribe((res: any) => {
         document.getElementById('closeBotPress').click();
-        this.listGraphs = res.Value;
+        this.listGraphs = res;
         this.isSuccessUpdate = true;
         setTimeout(() => {
           this.isSuccessUpdate = false;
         }, environment.duration);
       });
   }
-//  set the selected content
+  //  set the selected content
   onChangeContent(item) {
     this.selectedobject = JSON.stringify(item);
     this.selectedobject = JSON.parse(this.selectedobject);
@@ -358,12 +358,12 @@ export class HomaPageComponent implements OnInit {
       this.listcontent = this.AllType.file;
     }
   }
-// update diagram when change flow
+  // update diagram when change flow
   SetDiagram(todo) {
     this.active = todo;
     this.diagram.model = go.Model.fromJson(todo.object);
   }
-// open  add flow model
+  // open  add flow model
   BorderModel(BorderModelContent) {
     this.modalService.open(BorderModelContent, {
       windowClass: 'animated fadeInDown',
@@ -371,7 +371,7 @@ export class HomaPageComponent implements OnInit {
       keyboard: false,
     });
   }
-// open action flow
+  // open action flow
   BorderModelBotPress(BorderModelContent, type) {
     this.type = type;
     this.modalService.open(BorderModelContent, {
@@ -380,17 +380,17 @@ export class HomaPageComponent implements OnInit {
       keyboard: false,
     });
   }
-// change the selected node  when click on node
+  // change the selected node  when click on node
   nodeclick(e, obj) {
     this.isSelected = true;
 
     this.selectedNode = obj.part.data;
   }
-// unselect node when click out
+  // unselect node when click out
   gojsclick() {
     this.isSelected = false;
   }
-// add flow
+  // add flow
   onSubmit() {
     let name = this.AddGraphFrom.value.name;
 
@@ -407,8 +407,8 @@ export class HomaPageComponent implements OnInit {
         },
         BotID: this.botid,
       })
-      .subscribe((res) => {
-        this.listGraphs.push(res);
+      .subscribe((res: any) => {
+        this.listGraphs = res;
         this.AddGraphFrom.reset();
         document.getElementById('closemodel').click();
         this.isSuccessClosed = true;
@@ -417,7 +417,7 @@ export class HomaPageComponent implements OnInit {
         }, environment.duration);
       });
   }
-// generate node id
+  // generate node id
   generate() {
     let id = () => {
       return Math.floor((1 + Math.random()) * 0x10000)
@@ -426,7 +426,7 @@ export class HomaPageComponent implements OnInit {
     };
     return 'node-' + id();
   }
-// copy botpress model
+  // copy botpress model
   CopyDetails() {
     this.c = {
       class: this.active.object.class,
@@ -481,7 +481,7 @@ export class HomaPageComponent implements OnInit {
     }
     // this.diagram.undoManager.clear();
   }
-// clear the node 
+  // clear the node
   ClearNode() {
     this.diagram.model.clear();
     this.diagram.model = go.Model.fromJson(this.diagram.model);
@@ -502,11 +502,13 @@ export class HomaPageComponent implements OnInit {
       });
     }
   }
-// save model
+  // save model
   Savegojs() {
     let data = this.diagram.model.nodeDataArray;
     let obj: Object = JSON.parse(this.diagram.model.toJson());
     obj.nodeDataArray = data as NodeDataArray[];
+    console.log(this.active._id);
+
     this.dashboardservice
       .PutData({
         _id: this.active._id,
@@ -515,7 +517,8 @@ export class HomaPageComponent implements OnInit {
         BotID: this.botid,
       })
       .subscribe((res: any) => {
-        this.listGraphs = res.Value;
+        this.listGraphs = res;
+        console.log(res);
         this.isSuccessUpdate = true;
         setTimeout(() => {
           this.isSuccessUpdate = false;

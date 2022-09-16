@@ -34,10 +34,10 @@ export class BotsComponent implements OnInit {
     this.botservice
       .PostData({
         _id: '',
-        name: name,
+        Name: name,
       })
-      .subscribe((res) => {
-        this.bots.push(res);
+      .subscribe((res:any) => {
+        this.bots = res;
         this.Addbot.reset();
         document.getElementById('closemodel').click();
         this.isSuccessClosed = true;
