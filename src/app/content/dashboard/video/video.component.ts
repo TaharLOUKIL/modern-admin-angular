@@ -6,7 +6,7 @@ import {
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Video } from 'src/app/Models/Texte';
+import { Video } from 'src/app/Models/Text';
 import { environment } from 'src/environments/environment';
 import { VideoService } from '../services/video.service';
 @Component({
@@ -27,11 +27,11 @@ export class VideoComponent implements OnInit {
   pageSize = 2;
   modified: Video = {
     _id: '',
-    createdAt: new Date(),
-    modifiedAt: new Date(),
+    CreatedAt: new Date(),
+    ModifiedAt: new Date(),
     Titre: '',
-    url: '',
-    type: '',
+    Url: '',
+    Type: '',
   };
   isSuccessAdded = false;
   isSuccessModified = false;
@@ -62,7 +62,7 @@ export class VideoComponent implements OnInit {
     this.AddVideo.setValue({
       Id: element._id,
       titre: element.Titre,
-      url: element.url,
+      url: element.Url,
       isurl: true,
     });
     document.getElementById('Addclick').click();
@@ -101,14 +101,14 @@ export class VideoComponent implements OnInit {
         formData.append('url', '');
       }
       formData.append('Titre', form.titre);
-      formData.append('createdAt', this.modified.createdAt.toString());
+      formData.append('createdAt', this.modified.CreatedAt.toString());
       formData.append('ID', this.modified._id);
       this.http
         .put(environment.apiUrl + 'video', formData)
         .subscribe((res: Video[]) => {
           this.rows = res;
           this.isSuccessModified = true;
-          this.AddVideo.reset();
+          this.resetform();
           setTimeout(() => {
             this.isSuccessModified = false;
           }, environment.duration);
@@ -129,7 +129,7 @@ export class VideoComponent implements OnInit {
         .subscribe((res: Video[]) => {
           this.rows = res;
           this.isSuccessAdded = true;
-          this.AddVideo.reset();
+          this.resetform();
           setTimeout(() => {
             this.isSuccessAdded = false;
           }, environment.duration);

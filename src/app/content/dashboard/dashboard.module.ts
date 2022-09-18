@@ -10,12 +10,12 @@ import { PerfectScrollbarModule } from 'ngx-perfect-scrollbar';
 import { HomaPageComponent } from './homa-page/homa-page.component';
 import { HttpClientModule } from '@angular/common/http';
 import { BotsComponent } from './bots/bots.component';
-import { TexteComponent } from './texte/texte.component';
-import { LocalisationComponent } from './localisation/localisation.component';
+import { TextComponent } from './text/text.component';
+import { LocationComponent } from './Location/Location.component';
 import { ImageComponent } from './image/image.component';
 import { VideoComponent } from './video/video.component';
 import { AudioComponent } from './audio/audio.component';
-import { FichierComponent } from './fichier/fichier.component';
+import { FileComponent } from './file/file.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { ClipboardModule } from '@angular/cdk/clipboard';
 
@@ -44,11 +44,11 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
       },
       {
         path: 'content/Text',
-        component: TexteComponent,
+        component: TextComponent,
       },
       {
         path: 'content/Location',
-        component: LocalisationComponent,
+        component: LocationComponent,
       },
       {
         path: 'content/Image',
@@ -64,19 +64,19 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
       },
       {
         path: 'content/File',
-        component: FichierComponent,
+        component: FileComponent,
       },
     ]),
   ],
   declarations: [
     HomaPageComponent,
     BotsComponent,
-    TexteComponent,
-    LocalisationComponent,
+    TextComponent,
+    LocationComponent,
     ImageComponent,
     VideoComponent,
     AudioComponent,
-    FichierComponent,
+    FileComponent,
   ],
 
   exports: [RouterModule],

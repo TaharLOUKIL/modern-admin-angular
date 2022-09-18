@@ -1,39 +1,37 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { timeStamp } from 'console';
-import { date } from 'ngx-custom-validators/src/app/date/validator';
-import { Localisation } from 'src/app/Models/Localisation';
-import { Texte } from 'src/app/Models/Texte';
+import { Location } from 'src/app/Models/Location';
 import { environment } from 'src/environments/environment';
-import { LocalisationService } from '../services/Localisation.service';
+import { LocationService } from '../services/Location.service';
 @Component({
   selector: 'app-localisation',
-  templateUrl: './localisation.component.html',
-  styleUrls: ['./localisation.component.css'],
+  templateUrl: './Location.component.html',
+  styleUrls: ['./Location.component.css'],
 })
-export class LocalisationComponent implements OnInit {
+export class LocationComponent implements OnInit {
   isAdded: boolean;
-  rows: Localisation[] = [];
+  rows: Location[] = [];
   searchTerm: string;
   loading = false;
   page = 1;
   total: [1, 2, 3];
   pageSize = 2;
-  modified: Localisation = {
+  modified: Location = {
     _id: '',
     CreatedAt: new Date(),
     ModifiedAt: new Date(),
-    lattitude: '',
-    longitude: '',
+    Lattitude: '',
+    Longitude: '',
     Adresse: '',
     Titre: '',
+    Type: 'Location',
   };
   isSuccessAdded = false;
   isSuccessModified = false;
   isSuccessDeleted = false;
   constructor(
-    private LocalisationService: LocalisationService,
+    private LocalisationService: LocationService,
     private modalService: NgbModal
   ) {}
   AddLocalisation = new FormGroup({
@@ -47,20 +45,21 @@ export class LocalisationComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     // load list of localisation
-    this.LocalisationService.getData().subscribe((res: Localisation[]) => {
+    this.LocalisationService.getData().subscribe((res: Location[]) => {
       console.log(res);
       this.rows = res;
       this.loading = false;
     });
   }
   // reset form when click on update
-  UpdateTexte(element: Localisation) {
+  UpdateTexte(element: Location) {
+    console.log(element);
     this.isAdded = false;
     this.modified = element;
     this.AddLocalisation.setValue({
       Id: element._id,
-      latitude: element.lattitude,
-      longitude: element.longitude,
+      latitude: element.Lattitude,
+      longitude: element.Longitude,
       adresse: element.Adresse,
       titre: element.Titre,
     });
@@ -71,11 +70,12 @@ export class LocalisationComponent implements OnInit {
     document.getElementById('closemodal').click();
     this.resetform();
   }
+
   // delete localisation
   clickMethod(element) {
     if (confirm('Are you sure to delete ')) {
       this.LocalisationService.DeleteData(element).subscribe(
-        (res: Localisation[]) => {
+        (res: Location[]) => {
           this.rows = res;
           this.isSuccessDeleted = true;
           setTimeout(() => {
@@ -91,13 +91,14 @@ export class LocalisationComponent implements OnInit {
     if (form.Id != '') {
       this.LocalisationService.PutData({
         _id: this.modified._id,
-        lattitude: form.latitude,
-        longitude: form.longitude,
+        Lattitude: form.latitude,
+        Longitude: form.longitude,
         Adresse: form.adresse,
         Titre: form.titre,
         CreatedAt: this.modified.CreatedAt,
         ModifiedAt: new Date(),
-      }).subscribe((res: Localisation[]) => {
+        Type: 'Location',
+      }).subscribe((res: Location[]) => {
         this.resetform();
         this.rows = res;
         document.getElementById('closemodal').click();
@@ -109,16 +110,17 @@ export class LocalisationComponent implements OnInit {
     } else {
       this.LocalisationService.PostData({
         _id: '',
-        lattitude: form.latitude,
-        longitude: form.longitude,
+        Lattitude: form.latitude,
+        Longitude: form.longitude,
         Adresse: form.adresse,
         Titre: form.titre,
         CreatedAt: this.modified.CreatedAt,
         ModifiedAt: new Date(),
-      }).subscribe((res: Localisation[]) => {
+        Type: 'Location',
+      }).subscribe((res: Location[]) => {
         this.rows = res;
         this.isSuccessAdded = true;
-        this.AddLocalisation.reset();
+        this.resetform();
         setTimeout(() => {
           this.isSuccessAdded = false;
         }, environment.duration);

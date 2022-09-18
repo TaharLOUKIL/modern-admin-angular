@@ -1,20 +1,19 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { FichierComponent } from './fichier.component';
+import { TextComponent } from './text.component';
 
-describe('FichierComponent', () => {
-  let component: FichierComponent;
-  let fixture: ComponentFixture<FichierComponent>;
+describe('TexteComponent', () => {
+  let component: TextComponent;
+  let fixture: ComponentFixture<TextComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ FichierComponent ]
-    })
-    .compileComponents();
+      declarations: [TextComponent],
+    }).compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(FichierComponent);
+    fixture = TestBed.createComponent(TextComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

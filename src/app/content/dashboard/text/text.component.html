@@ -9,7 +9,9 @@
       class="mb-2"
     >
       <strong>Succeess! </strong>
-      <a [routerLink]="" class="alert-link">  your File has been successfully deleted</a>
+      <a [routerLink]="" class="alert-link">
+        your Text has been successfully deleted</a
+      >
     </ngb-alert>
     <ngb-alert
       *ngIf="isSuccessAdded"
@@ -20,7 +22,9 @@
       class="mb-2"
     >
       <strong>Succeess! </strong>
-      <a [routerLink]="" class="alert-link">your File has been successfully added</a>
+      <a [routerLink]="" class="alert-link">
+        your Text has been successfully added</a
+      >
     </ngb-alert>
     <ngb-alert
       *ngIf="isSuccessModified"
@@ -31,7 +35,9 @@
       class="mb-2"
     >
       <strong>Succeess! </strong>
-      <a [routerLink]="" class="alert-link"> your File has been successfully modified</a>
+      <a [routerLink]="" class="alert-link"
+        >your Text has been successfully modified</a
+      >
     </ngb-alert>
     <ng-template
       class="modal border-pink text-left"
@@ -39,22 +45,22 @@
       let-c="close"
       let-d="dismiss"
     >
-      <form [formGroup]="AddFichier" (ngSubmit)="onSubmit()">
+      <form [formGroup]="AddTexte" (ngSubmit)="onSubmit()">
         <div class="modal-content border-pink">
           <div class="modal-header border-bottom-pink">
             <h4
-              *ngIf="!AddFichier.value.Id"
+              *ngIf="!AddTexte.value.Id"
               class="modal-title"
               id="myModalLabel22"
             >
-              <i class="la la-tree"></i>Add File
+              <i class="la la-tree"></i>Add Text
             </h4>
             <h4
-              *ngIf="AddFichier.value.Id"
+              *ngIf="AddTexte.value.Id"
               class="modal-title"
               id="myModalLabel22"
             >
-              <i class="la la-tree"></i>Update File
+              <i class="la la-tree"></i>Update Text
             </h4>
             <button
               type="button"
@@ -66,6 +72,7 @@
             </button>
           </div>
           <div class="modal-body">
+            <h4 class="card-title">Message</h4>
             <div class="card-block">
               <div class="card-body">
                 <div class="form-group">
@@ -75,55 +82,19 @@
                     id="defaultInputText"
                     formControlName="Id"
                   />
-                  <h4 class="card-title">Titre</h4>
                   <input
                     type="text"
                     class="form-control"
                     id="defaultInputText"
-                    formControlName="titre"
+                    formControlName="message"
                   />
-                  <input type="checkbox" formControlName="isurl" />
-                  is URL
-                  <div *ngIf="AddFichier.value.isurl">
-                    <h4 class="card-title">url</h4>
-                    <input
-                      type="text"
-                      class="form-control"
-                      id="defaultInputText"
-                      formControlName="url"
-                    />
-                  </div>
-
-                  <div
-                    class="row"
-                    style="margin-bottom: 15px"
-                    *ngIf="!AddFichier.value.isurl"
-                  >
-                    <div class="col-md-3">
-                      <input
-                        type="file"
-                        #file
-                        placeholder="Choose file"
-                        (change)="changefile(file.files)"
-                      />
-                    </div>
-                    <div class="col-md-4">
-                      <span class="upload" *ngIf="progress > 0">
-                        {{ progress }}%
-                      </span>
-                      <span class="upload" *ngIf="message">
-                        {{ message }}
-                      </span>
-                    </div>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
           <div class="modal-footer">
             <button
-              style="display: none"
-              id="closemodal"
+              id="closemodel"
               type="button"
               (click)="d('Close modal')"
               class="btn grey btn-outline-secondary"
@@ -131,20 +102,9 @@
               Close
             </button>
             <button
-              type="button"
-              (click)="close()"
-              class="btn grey btn-outline-secondary"
-            >
-              Close
-            </button>
-            <button
               type="submit"
               class="btn btn-outline-pink"
-              [disabled]="
-                !AddFichier.valid ||
-                (AddFichier.value.url == '' && AddFichier.value.isurl) ||
-                (files == null && !AddFichier.value.isurl)
-              "
+              [disabled]="!AddTexte.valid"
             >
               Save changes
             </button>
@@ -156,7 +116,7 @@
       <div class="col-sm-12" *blockUI="'basicTables'; message: 'Loading'">
         <div class="card">
           <div class="card-header">
-            <h4 class="card-title">File Management</h4>
+            <h4 class="card-title">Text Management</h4>
           </div>
           <div class="card-body">
             <button
@@ -165,13 +125,13 @@
               type="button"
               class="btn btn-success btn-min-width mr-1 mb-1"
             >
-              New File
+              New text
             </button>
           </div>
           <div class="table-responsive card-body">
             <form>
               <div class="form-group form-inline">
-                Full File search:
+                Full text search:
                 <input
                   class="form-control ml-2"
                   type="text"
@@ -222,25 +182,27 @@
                     </td>
                     <td>
                       <ngb-highlight
-                        result="file"
+                        result="Text"
                         [term]="searchTerm"
                       ></ngb-highlight>
                     </td>
                     <td>
-                      <a target="_blank" [href]="element.url">
-                        {{ element.url }}</a
-                      >
-                    </td>
-                    <td>
                       <ngb-highlight
-                        [result]="element.createdAt"
+                        [result]="element.Message"
                         [term]="searchTerm"
                       >
                       </ngb-highlight>
                     </td>
                     <td>
                       <ngb-highlight
-                        [result]="element.modifiedAt"
+                        [result]="element.CreatedAt"
+                        [term]="searchTerm"
+                      >
+                      </ngb-highlight>
+                    </td>
+                    <td>
+                      <ngb-highlight
+                        [result]="element.ModifiedAt"
                         [term]="searchTerm"
                       >
                       </ngb-highlight>
@@ -251,14 +213,14 @@
                         (click)="UpdateTexte(element)"
                         class="btn btn-info btn-min-width mr-1 mb-1"
                       >
-                      Update
+                        Update
                       </button>
                       <button
                         type="button"
                         (click)="clickMethod(element)"
                         class="btn btn-danger btn-min-width mr-1 mb-1"
                       >
-                      Delete
+                        Delete
                       </button>
                     </td>
                   </tr>

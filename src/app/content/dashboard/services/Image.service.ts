@@ -1,7 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { bots } from 'src/app/Models/Bots';
-import { Image, Texte } from 'src/app/Models/Texte';
+import { Image } from 'src/app/Models/Text';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

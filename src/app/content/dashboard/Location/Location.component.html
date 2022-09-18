@@ -48,14 +48,25 @@
       <form [formGroup]="AddLocalisation" (ngSubmit)="onSubmit()">
         <div class="modal-content border-pink">
           <div class="modal-header border-bottom-pink">
-            <h4 class="modal-title" id="myModalLabel22">
+            <h4
+              *ngIf="!AddLocalisation.value.Id"
+              class="modal-title"
+              id="myModalLabel22"
+            >
               <i class="la la-tree"></i>Add Location
+            </h4>
+            <h4
+              *ngIf="AddLocalisation.value.Id"
+              class="modal-title"
+              id="myModalLabel22"
+            >
+              <i class="la la-tree"></i>Update Location
             </h4>
             <button
               type="button"
               class="close"
               aria-label="Close"
-              (click)="d('Cross click')"
+              (click)="close()"
             >
               <span aria-hidden="true">&times;</span>
             </button>
@@ -206,21 +217,21 @@
                     </td>
                     <td>
                       <ngb-highlight
-                        [result]="element.longitude + ' ' + element.lattitude"
+                        [result]="element.Longitude + ' ' + element.Lattitude"
                         [term]="searchTerm"
                       >
                       </ngb-highlight>
                     </td>
                     <td>
                       <ngb-highlight
-                        [result]="element.createdAt"
+                        [result]="element.CreatedAt"
                         [term]="searchTerm"
                       >
                       </ngb-highlight>
                     </td>
                     <td>
                       <ngb-highlight
-                        [result]="element.modifiedAt"
+                        [result]="element.ModifiedAt"
                         [term]="searchTerm"
                       >
                       </ngb-highlight>

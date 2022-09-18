@@ -1,44 +1,40 @@
-import {
-  HttpClient,
-  HttpErrorResponse,
-  HttpEventType,
-} from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Fichier } from 'src/app/Models/Texte';
+import { File } from 'src/app/Models/Text';
 import { environment } from 'src/environments/environment';
-import { AudioService } from '../services/Audio.service';
-import { FichierService } from '../services/fichier.service';
+import { FileService } from '../services/file.service';
 
 @Component({
   selector: 'app-fichier',
-  templateUrl: './fichier.component.html',
-  styleUrls: ['./fichier.component.css'],
+  templateUrl: './file.component.html',
+  styleUrls: ['./file.component.css'],
 })
-export class FichierComponent implements OnInit {
+export class FileComponent implements OnInit {
   progress: number;
   message: string;
   files;
   isAdded: boolean;
-  rows: Fichier[] = [];
+  rows: File[] = [];
   searchTerm: string;
   loading = false;
   page = 1;
   total: [1, 2, 3];
   pageSize = 2;
-  modified: Fichier = {
+  modified: File = {
     _id: '',
-    createdAt: new Date(),
-    modifiedAt: new Date(),
+    CreatedAt: new Date(),
+    ModifiedAt: new Date(),
     Titre: '',
-    url: '',
+    Url: '',
+    Type: 'File',
   };
   isSuccessAdded = false;
   isSuccessModified = false;
   isSuccessDeleted = false;
   constructor(
-    private fichierService: FichierService,
+    private fichierService: FileService,
     private modalService: NgbModal,
     private http: HttpClient
   ) {}
@@ -52,20 +48,20 @@ export class FichierComponent implements OnInit {
   ngOnInit(): void {
     this.loading = true;
     // load list of fil
-    this.fichierService.getData().subscribe((res: Fichier[]) => {
+    this.fichierService.getData().subscribe((res: File[]) => {
       console.log(res);
       this.rows = res;
       this.loading = false;
     });
   }
   // reset form when click on update
-  UpdateTexte(element: Fichier) {
+  UpdateTexte(element: File) {
     this.isAdded = false;
     this.modified = element;
     this.AddFichier.setValue({
       Id: element._id,
       titre: element.Titre,
-      url: element.url,
+      url: element.Url,
       isurl: true,
     });
     document.getElementById('Addclick').click();
@@ -79,7 +75,7 @@ export class FichierComponent implements OnInit {
   // delete file
   clickMethod(element) {
     if (confirm('Are you sure to delete ')) {
-      this.fichierService.DeleteData(element).subscribe((res: Fichier[]) => {
+      this.fichierService.DeleteData(element).subscribe((res: File[]) => {
         this.rows = res;
         this.isSuccessDeleted = true;
         setTimeout(() => {
@@ -104,14 +100,14 @@ export class FichierComponent implements OnInit {
         formData.append('url', '');
       }
       formData.append('Titre', form.titre);
-      formData.append('createdAt', this.modified.createdAt.toString());
+      formData.append('createdAt', this.modified.CreatedAt.toString());
       formData.append('ID', this.modified._id);
       this.http
         .put(environment.apiUrl + 'File', formData)
-        .subscribe((res: Fichier[]) => {
+        .subscribe((res: File[]) => {
           this.rows = res;
           this.isSuccessModified = true;
-          this.AddFichier.reset();
+          this.resetform();
           setTimeout(() => {
             this.isSuccessModified = false;
           }, environment.duration);
@@ -129,10 +125,10 @@ export class FichierComponent implements OnInit {
 
       this.http
         .post(environment.apiUrl + 'File', formData)
-        .subscribe((res: Fichier[]) => {
+        .subscribe((res: File[]) => {
           this.rows = res;
           this.isSuccessAdded = true;
-          this.AddFichier.reset();
+          this.resetform();
           setTimeout(() => {
             this.isSuccessAdded = false;
           }, environment.duration);

@@ -1,30 +1,28 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { bots } from 'src/app/Models/Bots';
-import { Localisation } from 'src/app/Models/Localisation';
-import { Texte } from 'src/app/Models/Texte';
+import { Location } from 'src/app/Models/Location';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
-export class LocalisationService {
+export class LocationService {
   constructor(public httpclient: HttpClient) {}
 
   getData() {
     return this.httpclient.get(environment.apiUrl + 'location');
   }
 
-  PostData(data: Localisation) {
+  PostData(data: Location) {
     console.log(data);
     return this.httpclient.post(environment.apiUrl + 'location', data);
   }
 
-  PutData(data: Localisation) {
+  PutData(data: Location) {
     return this.httpclient.put(environment.apiUrl + 'location', data);
   }
 
-  DeleteData(data: Localisation) {
+  DeleteData(data: Location) {
     return this.httpclient.delete(environment.apiUrl + 'location/' + data._id);
   }
 }
