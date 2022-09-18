@@ -236,19 +236,19 @@
                     <td>
                       <img
                         style="height: 100px; width: 100px"
-                        [src]="element.Url"
+                        [src]="element.url"
                       />
                     </td>
                     <td>
                       <ngb-highlight
-                        [result]="element.CreatedAt"
+                        [result]="element.createdAt"
                         [term]="searchTerm"
                       >
                       </ngb-highlight>
                     </td>
                     <td>
                       <ngb-highlight
-                        [result]="element.ModifiedAt"
+                        [result]="element.modifiedAt"
                         [term]="searchTerm"
                       >
                       </ngb-highlight>

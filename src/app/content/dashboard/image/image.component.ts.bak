@@ -1,10 +1,15 @@
-import { HttpClient } from '@angular/common/http';
+import {
+  HttpClient,
+  HttpErrorResponse,
+  HttpEventType,
+} from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Image } from 'src/app/Models/Text';
+import { NgbModal, NgbModalOptions } from '@ng-bootstrap/ng-bootstrap';
+import { Image } from 'src/app/Models/Texte';
 import { environment } from 'src/environments/environment';
 import { ImageService } from '../services/Image.service';
+import { LocalisationService } from '../services/Localisation.service';
 
 @Component({
   selector: 'app-image',
@@ -24,11 +29,11 @@ export class ImageComponent implements OnInit {
   pageSize = 2;
   modified: Image = {
     _id: '',
-    CreatedAt: new Date(),
-    ModifiedAt: new Date(),
+    createdAt: new Date(),
+    modifiedAt: new Date(),
     Titre: '',
-    Url: '',
-    Type: '',
+    url: '',
+    type: '',
   };
   isSuccessAdded = false;
   isSuccessModified = false;
@@ -60,7 +65,7 @@ export class ImageComponent implements OnInit {
     this.AddImage.setValue({
       Id: element._id,
       titre: element.Titre,
-      url: element.Url,
+      url: element.url,
       isurl: true,
     });
     document.getElementById('Addclick').click();
@@ -99,14 +104,14 @@ export class ImageComponent implements OnInit {
         formData.append('url', '');
       }
       formData.append('Titre', form.titre);
-      formData.append('createdAt', this.modified.CreatedAt.toString());
+      formData.append('createdAt', this.modified.createdAt.toString());
       formData.append('ID', this.modified._id);
       this.http
         .put(environment.apiUrl + 'image', formData)
         .subscribe((res: Image[]) => {
           this.rows = res;
           this.isSuccessModified = true;
-          this.resetform();
+          this.AddImage.reset();
           setTimeout(() => {
             this.isSuccessModified = false;
           }, environment.duration);
@@ -127,7 +132,7 @@ export class ImageComponent implements OnInit {
         .subscribe((res: Image[]) => {
           this.rows = res;
           this.isSuccessAdded = true;
-          this.resetform();
+          this.AddImage.reset();
           setTimeout(() => {
             this.isSuccessAdded = false;
           }, environment.duration);
