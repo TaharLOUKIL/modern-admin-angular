@@ -2,12 +2,14 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 8.0.1
 
+
 ## Prerequisite Softwares
 Min 2 GB free space on the drive
 Node Js - Version 12+
 Git 2+
 npm install -g typescript
 npm install -g @angular/cli
+
 
 ## Development server
 
