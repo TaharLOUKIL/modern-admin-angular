@@ -1,0 +1,1 @@
+{"version":3,"file":"directive.d.ts","sources":["directive.d.ts"],"names":[],"mappings":"AAAA;;AACA;AACA;AACA;AACA;;;AACA","sourcesContent":["import { Validator, AbstractControl } from '@angular/forms';\nexport declare class DigitsValidator implements Validator {\n    validate(c: AbstractControl): {\n        [key: string]: any;\n    };\n}\n"]}
